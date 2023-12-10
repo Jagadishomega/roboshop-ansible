@@ -22,7 +22,7 @@
     - name: create app directory
       ansible.builtin.file:
         name: /usr/share/nginx/html
-        state: present
+        state: directory
         mode: 755
 
     - name: Download Frontend application content
