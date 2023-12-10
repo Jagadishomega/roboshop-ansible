@@ -25,7 +25,7 @@
         mode: 755
 
     - name: Download Frontend application content
-      ansible.builtin.unarhive:
+      ansible.builtin.unarchive:
         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
