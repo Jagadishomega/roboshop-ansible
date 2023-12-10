@@ -8,7 +8,12 @@
       ansible.builtin.yum:
         name: nginx
         state: installed
-
+   
+    - name:  Copy Nginx Configuration
+      ansible.builtin.copy:
+        src: nginx-roboshop.conf
+        dest: /etc/nginx/default.d/roboshop.conf
+   
     - name: Remove default Nginx config
       ansible.builtin.file:
         name: /usr/share/nginx/html/*
