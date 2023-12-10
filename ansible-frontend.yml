@@ -33,6 +33,4 @@
     - name: Start and Enable Nginx service
       ansible.builtin.systemd_service:
         name: nginx
-        daemon_reload: true
         state: restarted
-        enabled: yes
