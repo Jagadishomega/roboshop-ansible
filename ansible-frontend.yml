@@ -1,36 +1,25 @@
 ---
-
-- name: Roboshop Frontend playbook
+- name: Mongodb Setup
   hosts: all
   become: true
   tasks:
-    - name: Install Nginx service
-      ansible.builtin.yum:
-        name: nginx
-        state: installed
-   
-    - name:  Copy Nginx Configuration
+    - name:  Copy Mongodb repo
       ansible.builtin.copy:
-        src: nginx-roboshop.conf
-        dest: /etc/nginx/default.d/roboshop.conf
-   
-    - name: Remove default Nginx config
-      ansible.builtin.file:
-        name: /usr/share/nginx/html/*
-        state: absent
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
 
-    - name: create app directory
-      ansible.builtin.file:
-        name: /usr/share/nginx/html
-        state: directory
+    - name: Install Mongodb
+      ansible.builtin.yum:
+        name: mongodb-org
+        state: installed
 
-    - name: Download Frontend application content
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-        dest: /usr/share/nginx/html
-        remote_src: yes
+    - name: Replace localhost to 
+      ansible.builtin.replace:
+        path: /etc/mongod.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
 
     - name: Start and Enable Nginx service
       ansible.builtin.systemd_service:
-        name: nginx
+        name: mongod
         state: restarted
