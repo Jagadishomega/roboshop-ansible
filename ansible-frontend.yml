@@ -23,7 +23,6 @@
       ansible.builtin.file:
         name: /usr/share/nginx/html
         state: directory
-        mode: 755
 
     - name: Download Frontend application content
       ansible.builtin.unarchive:
