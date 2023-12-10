@@ -6,3 +6,8 @@
       ansible.builtin.yum:
         name: nginx
         state: installed
+    
+    - name: Start and Enable Nginx service
+      anisble.builtin.systemd_service:
+        name: nginx
+        state: restart
