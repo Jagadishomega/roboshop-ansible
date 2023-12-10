@@ -15,7 +15,7 @@
         state: absent
 
     - name: create app directory
-      ansible.bulitin.file:
+      ansible.builtin.file:
         name: /usr/share/nginx/html
         mode: 755
 
