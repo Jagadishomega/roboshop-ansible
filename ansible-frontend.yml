@@ -1,3 +1,5 @@
+---
+
 - name: Roboshop Frontend playbook
   host: all
   become: true
