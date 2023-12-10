@@ -8,7 +8,23 @@
       ansible.builtin.yum:
         name: nginx
         state: installed
-    
+
+    - name: Remove default Nginx config
+      ansible.builtin.file:
+        name: /usr/share/nginx/html/*
+        state: absent
+
+    - name: create app directory
+      ansible.bulitin.file:
+        name: /usr/share/nginx/html
+        mode: 755
+
+    - name: Download Frontend application content
+      ansible.builtin.unarhive:
+        src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+        dest: /usr/share/nginx/html
+        remote_src: yes
+
     - name: Start and Enable Nginx service
       ansible.builtin.systemd_service:
         name: nginx
